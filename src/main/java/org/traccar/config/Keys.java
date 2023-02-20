@@ -918,6 +918,13 @@ public final class Keys {
             List.of(KeyType.CONFIG, KeyType.USER));
 
     /**
+     * Alternative email recipient for notification delivery.
+     */
+    public static final ConfigKey<String> MAIL_SMTP_RCPT = new StringConfigKey(
+            "mail.smtp.rcpt",
+            List.of(KeyType.CONFIG, KeyType.USER));
+
+    /**
      * SMS API service full URL. Enables SMS commands and notifications.
      */
     public static final ConfigKey<String> SMS_HTTP_URL = new StringConfigKey(

@@ -81,6 +81,7 @@ public final class SmtpMailManager implements MailManager {
             copyStringProperty(properties, provider, Keys.MAIL_SMTP_SSL_PROTOCOLS);
             copyStringProperty(properties, provider, Keys.MAIL_SMTP_USERNAME);
             copyStringProperty(properties, provider, Keys.MAIL_SMTP_PASSWORD);
+            copyStringProperty(properties, provider, Keys.MAIL_SMTP_RCPT);
             copyStringProperty(properties, provider, Keys.MAIL_SMTP_FROM);
             copyStringProperty(properties, provider, Keys.MAIL_SMTP_FROM_NAME);
 
@@ -130,7 +131,11 @@ public final class SmtpMailManager implements MailManager {
             }
         }
 
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+        String rcpt = properties.getProperty(Keys.MAIL_SMTP_RCPT.getKey());
+        if (rcpt == null) {
+            rcpt = user.getEmail();
+        }
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(rcpt));
         message.setSubject(subject);
         message.setSentDate(new Date());
 
